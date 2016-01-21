@@ -6,4 +6,6 @@ public class Nomes
     public static final String MOD_ID = "animalmagic";
 
     public static final String MOD_ASSETS = MOD_ID.toLowerCase();
+
+    public static final String BLOCO_ANIMAL = "BlocoAnimal";
 }
