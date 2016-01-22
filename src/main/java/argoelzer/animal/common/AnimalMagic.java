@@ -4,9 +4,10 @@ import argoelzer.animal.common.blocos.BlocoAnimal;
 import argoelzer.animal.common.blocos.TileEntityBlocoAnimal;
 import argoelzer.animal.common.lib.Nomes;
 import cpw.mods.fml.common.Mod;
-        import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 
@@ -23,11 +24,12 @@ public class AnimalMagic {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evento) {
         GameRegistry.registerBlock(blocoAnimal = new BlocoAnimal(), Nomes.BLOCO_ANIMAL);
+        NetworkRegistry.INSTANCE.registerGuiHandler(instancia, new GuiHandler());
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent evento) {
-        GameRegistry.registerTileEntity(TileEntityBlocoAnimal.class, "TileEntityBlocoAnimal");
+        GameRegistry.registerTileEntity(TileEntityBlocoAnimal.class, Nomes.TILE_ENTITY_ANIMAL);
     }
 
 }
