@@ -1,5 +1,6 @@
 package argoelzer.animal.common.inventario;
 
+import argoelzer.animal.common.AnimalMagic;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,9 @@ public class SlotAnimal extends Slot {
     }
 
     @Override
-    public boolean isItemValid(ItemStack p_75214_1_) {
+    public boolean isItemValid(ItemStack stack) {
+        if (entrada && stack.getItem() != AnimalMagic.itemEspiritoAnimal)
+            return false;
         return true;
     }
 }

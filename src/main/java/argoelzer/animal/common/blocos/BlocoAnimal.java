@@ -17,6 +17,7 @@ public class BlocoAnimal extends BlockContainer {
         super(Material.iron);
         this.setHardness(1f);
         this.setBlockName(Nomes.BLOCO_ANIMAL);
+        this.setCreativeTab(AnimalMagic.abaAnimalMagic);
     }
 
     @Override

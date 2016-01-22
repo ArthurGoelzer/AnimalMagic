@@ -27,9 +27,6 @@ public class ContainerBlocoAnimal extends Container {
         for(int i = 0; i < 9; ++i) {
             addSlotToContainer(new Slot(jogador.inventory, i, 8 + i * 18, 84 + 58));
         }
-
-
-
     }
 
     @Override
@@ -41,7 +38,7 @@ public class ContainerBlocoAnimal extends Container {
             itemstack = itemstack1.copy();
 
             if (index < 11) {
-                if (!this.mergeItemStack(itemstack1, 11, 46, true))
+                if (!this.mergeItemStack(itemstack1, 11, 47, true))
                 {
                     return null;
                 }

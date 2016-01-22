@@ -10,10 +10,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 @Mod(name = Nomes.MOD_NOME, modid =  Nomes.MOD_ID, version = "0.1 teste")
 public class AnimalMagic {
     public static Block blocoAnimal;
+    public static Item itemEspiritoAnimal;
 
     @Mod.Instance(Nomes.MOD_ID)
     public static AnimalMagic instancia;
@@ -21,9 +24,18 @@ public class AnimalMagic {
     @SidedProxy(serverSide = "argoelzer.animal.common.CommonProxy", clientSide = "argoelzer.animal.client.ClientProxy")
     public static CommonProxy proxy;
 
+    public static CreativeTabs abaAnimalMagic;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evento) {
+        abaAnimalMagic = new CreativeTabs(CreativeTabs.getNextID(), Nomes.ABA_ANIMAL_MAGIC) {
+            @Override
+            public Item getTabIconItem() {
+                return itemEspiritoAnimal;
+            }
+        };
         GameRegistry.registerBlock(blocoAnimal = new BlocoAnimal(), Nomes.BLOCO_ANIMAL);
+        GameRegistry.registerItem(itemEspiritoAnimal = new ItemEspiritoAnimal(), Nomes.ITEM_ESPIRITO_ANIMAL);
         NetworkRegistry.INSTANCE.registerGuiHandler(instancia, new GuiHandler());
     }
 

@@ -1,19 +1,92 @@
 package argoelzer.animal.common.blocos;
 
+import argoelzer.animal.common.lib.Nomes;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory {
 
     public ItemStack[] inventario = new ItemStack[11];
+    public int tipoAnimal = 0;
+    public int ticks;
 
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        int rng = 18;
+        if(inventario[10] != null && !worldObj.isRemote)
+        {
+            tipoAnimal = inventario[10].getItemDamage();
+            if (tipoAnimal != 0) {
+                if (!inventario[10].hasTagCompound())
+                    inventario[10].setTagCompound(new NBTTagCompound());
+                NBTTagCompound tagCompound = inventario[10].getTagCompound();
+                produzir(tagCompound.getInteger(Nomes.KEY_NBT_QUANTIDADE), tipoAnimal);
+
+                Class classeAnimal = EntityAnimal.class;
+                switch (tipoAnimal) {
+                    case 1:
+                        classeAnimal = EntitySheep.class;
+                        break;
+                    case 2:
+                        classeAnimal = EntityCow.class;
+                        break;
+                    case 3:
+                        classeAnimal = EntityChicken.class;
+                        break;
+                }
+                //System.out.println("Lista de animais:");
+                List listaDeMobs = this.worldObj.getEntitiesWithinAABB(classeAnimal, AxisAlignedBB.getBoundingBox(this.xCoord - rng, this.yCoord - rng,
+                        this.zCoord - rng, this.xCoord + rng, this.yCoord + rng, this.zCoord + rng));
+                Iterator iterator = listaDeMobs.iterator();
+                int quantidadeViva = 0;
+                while (iterator.hasNext()) {
+                    Entity entidade = (Entity) iterator.next();
+                    //System.out.println(" \n Nome: " + entidade.getCommandSenderName() + "Coords: x:" + entidade.posX + " y:" + entidade.posY + " z:" + entidade.posZ);
+                    quantidadeViva++;
+                    if (quantidadeViva > 2 && !worldObj.isRemote)
+                        absorverEntidade(entidade);
+                }
+            }
+        }
+    }
+
+    private void absorverEntidade(Entity entidade) {
+        if (inventario[10] != null) {
+            if (!inventario[10].hasTagCompound())
+                inventario[10].setTagCompound(new NBTTagCompound());
+            NBTTagCompound tagCompound = inventario[10].getTagCompound();
+            int quantidadeAtual = tagCompound.getInteger(Nomes.KEY_NBT_QUANTIDADE);
+            if (quantidadeAtual < 100) {
+                tagCompound.setInteger(Nomes.KEY_NBT_QUANTIDADE, quantidadeAtual + 1);
+            } else {
+
+            }
+            entidade.setDead();
+        }
+    }
+
+    private void produzir(int quantidade, int tipo) {
+        ticks++;
+        if (ticks >= 200) {
+            System.out.println("aaaaaa... vou produzir " + quantidade);
+            ticks = 0;
+        }
     }
 
     @Override
@@ -56,16 +129,12 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
 
     @Override
     public boolean canInsertItem(int slot, ItemStack stack, int lado) {
-        if (slot < 10)
-            return true;
-        return false;
+        return slot < 10;
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int lado) {
-        if (slot < 10)
-            return true;
-        return false;
+        return slot < 10;
     }
 
     @Override
@@ -153,9 +222,7 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
-        if (i > 9)
-            return false;
-        return true;
+        return i <= 9;
     }
 
 }
