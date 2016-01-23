@@ -17,15 +17,16 @@ public class ContainerBlocoAnimal extends Container {
         for (int i = 0; i < 10; i++) {
             adicionarSaidas(i, i >= 5 ? 1 : 0);
         }
-        this.addSlotToContainer(new SlotAnimal(tileAnimal, 10, 80, 16, true));
+        this.addSlotToContainer(new SlotAnimal(tileAnimal, 10, 80, 17, true, false));
+        this.addSlotToContainer(new SlotAnimal(tileAnimal, 11, 80, 75, true, true));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
-                addSlotToContainer(new Slot(jogador.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlotToContainer(new Slot(jogador.inventory, j + i * 9 + 9, 8 + j * 18, 96 + i * 18));
             }
         }
         for(int i = 0; i < 9; ++i) {
-            addSlotToContainer(new Slot(jogador.inventory, i, 8 + i * 18, 84 + 58));
+            addSlotToContainer(new Slot(jogador.inventory, i, 8 + i * 18, 96 + 58));
         }
     }
 
@@ -33,12 +34,13 @@ public class ContainerBlocoAnimal extends Container {
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
         ItemStack itemstack = null;
         Slot slot = (Slot)this.inventorySlots.get(index);
+        System.out.println(index);
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < 11) {
-                if (!this.mergeItemStack(itemstack1, 11, 47, true))
+            if (index < 12) {
+                if (!this.mergeItemStack(itemstack1, 12, 48, true))
                 {
                     return null;
                 }
@@ -64,9 +66,9 @@ public class ContainerBlocoAnimal extends Container {
 
     private void adicionarSaidas(int id, int ln) {
         if (ln == 0) {
-            this.addSlotToContainer(new SlotAnimal(tileAnimal, id, 44 + (id * 18), 37, false));
+            this.addSlotToContainer(new SlotAnimal(tileAnimal, id, 44 + (id * 18), 37, false, false));
         } else {
-            this.addSlotToContainer(new SlotAnimal(tileAnimal, id, 44 + ((id - 5) * 18), 37 + 18, false));
+            this.addSlotToContainer(new SlotAnimal(tileAnimal, id, 44 + ((id - 5) * 18), 37 + 18, false, false));
         }
         ////System.out.println("\n id: " + id +"\n ln: " + ln); DEBUG
     }

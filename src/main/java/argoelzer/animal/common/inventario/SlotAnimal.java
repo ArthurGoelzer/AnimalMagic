@@ -1,21 +1,32 @@
 package argoelzer.animal.common.inventario;
 
+import argoelzer.animal.client.Texturas;
 import argoelzer.animal.common.AnimalMagic;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class SlotAnimal extends Slot {
-    public boolean entrada;
-    public SlotAnimal(IInventory inventario, int id, int x, int y, boolean entrada) {
+    public boolean entrada, modificador;
+    public SlotAnimal(IInventory inventario, int id, int x, int y, boolean entrada, boolean modificador) {
             super(inventario, id, x, y);
         this.entrada = entrada;
+        this.modificador = modificador;
     }
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        if (entrada && stack.getItem() != AnimalMagic.itemEspiritoAnimal)
+        if (modificador) {
+            if (stack.getItem() == Items.dye)
+                return true;
             return false;
-        return true;
+        }
+        if (entrada) {
+            return (stack.getItem() == AnimalMagic.itemEspiritoAnimal && stack.getItemDamage() != 0);
+        } else {
+            return !(stack.getItem() == AnimalMagic.itemEspiritoAnimal);
+        }
     }
 }

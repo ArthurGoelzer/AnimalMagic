@@ -16,6 +16,7 @@ public class GuiBlocoAnimal extends GuiContainer {
         super(new ContainerBlocoAnimal(tileAnimal, player));
         this.jogador = player;
         this.tileAnimal = tileAnimal;
+        ySize=178;
     }
 
     @Override

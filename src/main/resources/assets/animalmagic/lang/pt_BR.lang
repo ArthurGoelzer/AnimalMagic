@@ -1,1 +1,15 @@
-container.bloco.animal=Bloco Animal
+container.bloco.animal=Gaiola mágica
+
+tile.BlocoAnimal.name=Gaiola mágica
+
+item.EspiritoAnimalOvelha.name=Espiritos em uma gema (Ovelha)
+item.EspiritoAnimalGalinha.name=Espiritos em uma gema (Galinha)
+item.EspiritoAnimalVazio.name=Gema espiritual
+
+nome.jogador=Dono
+nome.quantidade=Quantidade de animais
+nome.jogador.indefinido=Dono Indefinido
+
+msg.instru.items=Armazena espiritos de animais
+
+itemGroup.AbaAnimalMagic=Animal Magic
