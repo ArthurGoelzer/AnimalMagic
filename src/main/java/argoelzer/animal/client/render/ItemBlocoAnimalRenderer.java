@@ -30,6 +30,8 @@ public class ItemBlocoAnimalRenderer implements IItemRenderer {
             GL11.glTranslatef(0.5f, 0.1f, 0.5f);
             GL11.glScalef(0.8f, 0.9f, 0.8f);
         }
+        if(type == ItemRenderType.ENTITY)
+            GL11.glTranslatef(0, -0.9f, 0);
         modelo.render(null, 0, 0, 0, 0, 0, 0.0625f);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

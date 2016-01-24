@@ -32,7 +32,7 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
     @Override
     public void updateEntity() {
         super.updateEntity();
-        int rng = 18;
+        int rng = 5;
         if (!worldObj.isRemote) {
 
 
@@ -116,13 +116,13 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
 
     private void produzir(int quantidade, int tipo) {
         ticksProdu++;
-        if (ticksProdu >= 1000) {
+        if (ticksProdu >= 800) {
             ticksProdu = 0;
             Random random = new Random();
             switch (tipo) {
                 case 1:
                     for (int i = quantidade; i > 0; i--) {
-                        if (random.nextInt(100) < 15) {
+                        if (random.nextInt(100) < 22) {
                             if (random.nextInt() < 70) {
                                 adicionarItem(Item.getItemFromBlock(Blocks.wool), Cores.CORANTE_AT_LA[inventario[11] != null ? inventario[11].getItemDamage() : 15], quantidade);
 

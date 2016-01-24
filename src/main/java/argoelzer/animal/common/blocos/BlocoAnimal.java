@@ -21,6 +21,7 @@ public class BlocoAnimal extends BlockContainer {
         this.setHardness(1f);
         this.setBlockName(Nomes.BLOCO_ANIMAL);
         this.setCreativeTab(AnimalMagic.abaAnimalMagic);
+        this.setBlockTextureName("log_jungle_top");
     }
 
     @Override

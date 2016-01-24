@@ -2,6 +2,7 @@ package argoelzer.animal.common.inventario;
 
 import argoelzer.animal.client.Texturas;
 import argoelzer.animal.common.AnimalMagic;
+import argoelzer.animal.common.lib.Nomes;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -24,7 +25,7 @@ public class SlotAnimal extends Slot {
             return false;
         }
         if (entrada) {
-            return (stack.getItem() == AnimalMagic.itemEspiritoAnimal && stack.getItemDamage() != 0);
+            return (stack.getItem() == AnimalMagic.itemEspiritoAnimal && stack.getItemDamage() != 0 && stack.hasTagCompound() && stack.getTagCompound().hasKey(Nomes.KEY_NBT_USUARIO));
         } else {
             return !(stack.getItem() == AnimalMagic.itemEspiritoAnimal);
         }

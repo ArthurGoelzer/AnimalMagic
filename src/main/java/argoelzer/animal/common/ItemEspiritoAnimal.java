@@ -6,9 +6,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -23,17 +25,34 @@ public class ItemEspiritoAnimal extends Item {
     }
 
     @Override
+    public boolean hasEffect(ItemStack stack, int pass) {
+        return stack.getItemDamage() != 0 ? true : false;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote && stack.getItemDamage() != 0 &&(!stack.hasTagCompound() || stack.hasTagCompound() && stack.stackTagCompound.hasKey(Nomes.KEY_NBT_USUARIO))) {
+            if (!stack.hasTagCompound())
+                stack.setTagCompound(new NBTTagCompound());
+            stack.stackTagCompound.setString(Nomes.KEY_NBT_USUARIO, player.getCommandSenderName());
+        }
+        return super.onItemRightClick(stack, world, player);
+    }
+
+    @Override
     public void addInformation(ItemStack stack, EntityPlayer jogador, List lista, boolean b) {
         if (stack.getItemDamage() != 0) {
             if (stack.hasTagCompound()) {
-                lista.add(StatCollector.translateToLocal("nome.jogador") + ": " + stack.getTagCompound().getString(Nomes.KEY_NBT_USUARIO));
                 lista.add(StatCollector.translateToLocal("nome.quantidade") + ": " + stack.getTagCompound().getInteger(Nomes.KEY_NBT_QUANTIDADE));
+                if (stack.stackTagCompound.hasKey(Nomes.KEY_NBT_USUARIO)) {
+                    lista.add(StatCollector.translateToLocal("nome.jogador") + ": " + stack.getTagCompound().getString(Nomes.KEY_NBT_USUARIO));
+                } else {
+                    lista.add(StatCollector.translateToLocal("nome.jogador.indefinido"));
+                }
             } else {
                 lista.add(StatCollector.translateToLocal("nome.jogador.indefinido"));
                 lista.add(StatCollector.translateToLocal("nome.quantidade") + ": " + 0);
             }
-        } else {
-            lista.add(StatCollector.translateToLocal("msg.instru.items"));
         }
         super.addInformation(stack, jogador, lista, b);
     }
