@@ -1,0 +1,15 @@
+container.bloco.animal=Magic Cage
+
+tile.BlocoAnimal.name=Magic Cage
+
+item.EspiritoAnimalOvelha.name=Spiritual Gem (Sheep)
+item.EspiritoAnimalGalinha.name=Spiritual Gem (Chicken)
+item.EspiritoAnimalVazio.name=Spiritual Gem
+
+nome.jogador=Owner
+nome.quantidade=Animal ammount
+nome.jogador.indefinido=Undefined owner - right click to bind
+
+msg.instru.items=Holds animals' spirits
+
+itemGroup.AbaAnimalMagic=Animal Magic
