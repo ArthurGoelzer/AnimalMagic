@@ -16,7 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-@Mod(name = Nomes.MOD_NOME, modid =  Nomes.MOD_ID, version = "0.1")
+@Mod(name = Nomes.MOD_NOME, modid =  Nomes.MOD_ID, version = "0.2")
 public class AnimalMagic {
     public static Block blocoAnimal;
     public static Item itemEspiritoAnimal;

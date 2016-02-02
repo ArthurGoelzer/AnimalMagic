@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.1"
+version = "0.2"
 group= "argoelzer.animal" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+archivesBaseName = "AnimalMagic"
 
 minecraft {
     version = "1.7.10-10.13.4.1566-1.7.10"

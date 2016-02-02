@@ -67,7 +67,8 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
             if (jogadorOnline)
                 produzir(tagCompound.getInteger(Nomes.KEY_NBT_QUANTIDADE), tipoAnimal);
 
-            if (tipoAnimal != 0) {
+
+            if (tipoAnimal != 0 && jogadorOnline) {
                 ticksScanAnimal++;
                 if (ticksScanAnimal >= 200) {
                     ticksScanAnimal = 0;
@@ -89,7 +90,7 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
                         Entity entidade = (Entity) iterator.next();
                         //System.out.println(" \n Nome: " + entidade.getCommandSenderName() + "Coords: x:" + entidade.posX + " y:" + entidade.posY + " z:" + entidade.posZ);
                         quantidadeViva++;
-                        if (quantidadeViva > 2 && !worldObj.isRemote)
+                        if (quantidadeViva > 10 && !worldObj.isRemote)
                             absorverEntidade(entidade);
                     }
                 }
@@ -122,7 +123,7 @@ public class TileEntityBlocoAnimal extends TileEntity implements ISidedInventory
             switch (tipo) {
                 case 1:
                     for (int i = quantidade; i > 0; i--) {
-                        if (random.nextInt(100) < 22) {
+                        if (random.nextInt(100) < 29) {
                             if (random.nextInt() < 70) {
                                 adicionarItem(Item.getItemFromBlock(Blocks.wool), Cores.CORANTE_AT_LA[inventario[11] != null ? inventario[11].getItemDamage() : 15], quantidade);
 
