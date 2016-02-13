@@ -1,0 +1,15 @@
+container.bloco.animal=Gaiola mágica
+
+tile.BlocoAnimal.name=Gaiola mágica
+
+item.EspiritoAnimalOvelha.name=Espirítos numa gema (Ovelha)
+item.EspiritoAnimalGalinha.name=Espirítos numa gema (Galinha)
+item.EspiritoAnimalVazio.name=Gema espiritual
+
+nome.jogador=Dono
+nome.quantidade=Quantidade de animais
+nome.jogador.indefinido=Dono Indefinido - Clica com o botão direito para ativar
+
+msg.instru.items=Armazena espíritos de animais
+
+itemGroup.AbaAnimalMagic=Animal Magic
